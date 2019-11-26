@@ -30,24 +30,26 @@ def subSet(C, t):
     return lc
 
 
-# def apriori(supMin, transacoes, itens):
-#     k: int = 1
-#     f_list = [{i} for i in itens if sigma(i) >= supMin] #itemset de 1 elemento
-#     f = fk = set(f_list)
-#     while(len(fk) != 0):
-#         ++k
-#         ck = genCandidatos(F, k-1)
-#         for t in transacoes:
-#             ct = subSet(ck, t)
-#             for c in ct:
-#                 #incrementa o suporte -> fiquei com dúvida nessa parte..
-#         fk_list = [{c} for c in ck if sigma(c) >= supMin]
-#         fk = set(fk_list)
-#         f.union(fk)
-#
-#     return f
+def apriori(supMin, transacoes, itens):
+    k: int = 1
+    f_list = [{i} for i in itens if sigma(i) >= supMin]  # itemset de 1 elemento
+    f = fk = set(f_list)
+    while len(fk) != 0:
+        ++k
+        ck = genCandidatos(f, k - 1)
+        for t in transacoes:
+            ct = subSet(ck, t)
+            for c in ct:
+                c
+                # incrementa o suporte -> fiquei com dúvida nessa parte..
+        fk_list = [{c} for c in ck if sigma(c) >= supMin]
+        fk = set(fk_list)
+        f.union(fk)
 
-#comentei a apriori pq esta dando erro de identação
+    return f
+
+
+# comentei a apriori pq esta dando erro de identação
 
 y = {'pao', 'leite', 'cafe'}
 x = [{'pao', 'leite'}, {'leite', 'cafe'}]
