@@ -8,6 +8,7 @@ Philipe Rocha
 """
 
 
+
 # suporte de cada item/ pensei em usar uma estrutura de (chave:valor) para armazenar isso;
 def sigma(item):
     item
@@ -16,8 +17,14 @@ def sigma(item):
 
 # função para gerar os candidatos a partir de F
 
-def genCandidatos(f, k):
-    return {{'bla'}}
+def genCandidatos(f):
+    l = []
+    fc = f.copy()
+    while fc:
+        t = fc.pop()
+        for c in fc:
+            l.append(c.union(t))
+    return l
 
 
 # função que gera o set com os conjuntos que estão nas transações
@@ -36,7 +43,7 @@ def apriori(supMin, transacoes, itens):
     f = fk = set(f_list)
     while len(fk) != 0:
         ++k
-        ck = genCandidatos(f, k - 1)
+        ck = genCandidatos(f)
         for t in transacoes:
             ct = subSet(ck, t)
             for c in ct:
@@ -51,6 +58,8 @@ def apriori(supMin, transacoes, itens):
 
 # comentei a apriori pq esta dando erro de identação
 
-y = {'pao', 'leite', 'cafe'}
+t = {'pao', 'leite', 'cafe'}
+t1 = [{'pao'}, {'leite'}, {'cafe'}]
 x = [{'pao', 'leite'}, {'leite', 'cafe'}]
-print(subSet(x, y))
+
+print(genCandidatos(x))
