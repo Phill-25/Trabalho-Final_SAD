@@ -23,7 +23,9 @@ def genCandidatos(f):
     while fc:
         t = fc.pop()
         for c in fc:
-            l.append(c.union(t))
+            u = c | t
+            if len(u) == len(c)+1:
+                l.append(u)
     return l
 
 
@@ -39,7 +41,7 @@ def subSet(C, t):
 
 def apriori(supMin, transacoes, itens):
     k: int = 1
-    f_list = [{i} for i in itens if sigma(i) >= supMin]  # itemset de 1 elemento
+    f_list = [{i} for i in itens if sigma(i) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
     f = fk = set(f_list)
     while len(fk) != 0:
         ++k
@@ -59,7 +61,8 @@ def apriori(supMin, transacoes, itens):
 # comentei a apriori pq esta dando erro de identação
 
 t = {'pao', 'leite', 'cafe'}
-t1 = [{'pao'}, {'leite'}, {'cafe'}]
-x = [{'pao', 'leite'}, {'leite', 'cafe'}]
 
-print(genCandidatos(x))
+t1 = [{'pao'}, {'leite'}, {'cafe'}]
+x = [{'pao', 'leite'}, {'leite', 'cafe'}, {'ovo', 'cafe'}]
+print(subSet(x, t))
+print(genCandidatos(t1))
