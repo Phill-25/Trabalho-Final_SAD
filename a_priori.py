@@ -15,7 +15,7 @@ def sigma(item):
     return 0
 
 
-# função para gerar os candidatos a partir de F
+# função para gerar os candidatos a partir de F -> funcionando
 
 def genCandidatos(f):
     l = []
@@ -29,7 +29,7 @@ def genCandidatos(f):
     return l
 
 
-# função que gera o set com os conjuntos que estão nas transações
+# função que gera o set com os conjuntos que estão nas transações -> funcionando
 
 def subSet(C, t):
     lc = []
@@ -57,8 +57,6 @@ def apriori(supMin, transacoes, itens):
 
     return f
 
-
-# comentei a apriori pq esta dando erro de identação
 
 t = {'pao', 'leite', 'cafe'}
 
