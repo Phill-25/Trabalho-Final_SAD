@@ -23,12 +23,11 @@ def genCandidatos(f, k):
 # função que gera o set com os conjuntos que estão nas transações
 
 def subSet(C, t):
-    sc = set()
+    lc = []
     for c in C:
-        cs = set(c)
-        if (t.issuperset(cs)):
-            print(cs)
-    return sc #buscar uma forma de gerar um set unico de retorno!!!
+        if (t.issuperset(c)):
+            lc.append(c)
+    return lc
 
 
 # def apriori(supMin, transacoes, itens):
@@ -52,4 +51,4 @@ def subSet(C, t):
 
 y = {'pao', 'leite', 'cafe'}
 x = [{'pao', 'leite'}, {'leite', 'cafe'}]
-subSet(x, y)
+print(subSet(x, y))
