@@ -8,7 +8,6 @@ Philipe Rocha
 """
 
 
-
 # suporte de cada item/ pensei em usar uma estrutura de (chave:valor) para armazenar isso;
 def sigma(item):
     item
@@ -24,7 +23,7 @@ def genCandidatos(f):
         t = fc.pop()
         for c in fc:
             u = c | t
-            if len(u) == len(c)+1:
+            if len(u) == len(c) + 1:
                 listC.append(u)
     return listC
 
@@ -44,7 +43,7 @@ def apriori(supMin, transacoes, itens):
     f_list = [{i} for i in itens if sigma(i) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
     f = fk = set(f_list)
     while len(fk) != 0:
-        ++k
+        k += 1
         ck = genCandidatos(f)
         for t in transacoes:
             ct = subSet(ck, t)
@@ -57,10 +56,10 @@ def apriori(supMin, transacoes, itens):
 
     return f
 
+
 def norData():
     ref = open("house_votes_84.data", "r")
     new = open("house_votes_nor.data", "w")
-
 
     for line in ref:
         sline = line.split(",")
@@ -71,17 +70,20 @@ def norData():
                 if sline[i].__eq__('republican'):
                     lineSet.append(x)
                 else:
-                    lineSet.append(x*-1)
-            if i == 16:
-                lineSet.append(sline[i])
+                    lineSet.append(x * -1)
             else:
                 if sline[i] == "?":
                     lineSet.append("?")
                 else:
-                    if sline[i] == "y":
-                        lineSet.append(x)
+                    if i == 16:
+                        lineSet.append(sline[i])
+
                     else:
-                        lineSet.append(x*-1)
+                        if sline[i] == "y":
+                            lineSet.append(x)
+                        else:
+                            lineSet.append(x * -1)
+
 
         strSet = lineSet.__str__()
         new.write(strSet)
@@ -92,9 +94,7 @@ def norData():
     return 1
 
 
-
 def main():
-
     t = {1, -2, 3}
 
     t1 = [{1}, {-2}, {-3}]
@@ -106,5 +106,6 @@ def main():
 
     norData()
     print("END!")
+
 
 main()
