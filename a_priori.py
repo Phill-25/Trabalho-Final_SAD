@@ -59,6 +59,10 @@ def sigma(citem):
 
     return sig
 
+def conf(regra):
+    lr = list(regra)
+    return sigma(lr)/sigma([lr[0]])
+
 
 # função para gerar os candidatos a partir de F -> funcionando
 
@@ -117,7 +121,13 @@ def apriori(supMin, transacoes, itens):
 def main():
     norData()
     x = apriori(supMin, data, itens_data)
+    for i in x:
+        li = list(i)
+        print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
+        print("Confiança:"+str(conf(i)))
+        li.reverse()
+        print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
+        print("Confiança:"+str(conf(i)))
 
-    print(x)
 
 main()
