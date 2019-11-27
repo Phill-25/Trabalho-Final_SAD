@@ -7,11 +7,18 @@ Maycon Muller
 Philipe Rocha
 """
 
+data = []
+
 
 # suporte de cada item/ pensei em usar uma estrutura de (chave:valor) para armazenar isso;
-def sigma(item):
-    item
-    return 0
+def sigma(citem):
+    sig = 0
+    sc = set(citem)
+    for d in data:
+        if sc.issubset(d):
+            sig += 1
+
+    return sig
 
 
 # função para gerar os candidatos a partir de F -> funcionando
@@ -33,7 +40,7 @@ def genCandidatos(f):
 def subSet(C, t):
     lc = []
     for c in C:
-        if (t.issuperset(c)):
+        if t.issuperset(c):
             lc.append(c)
     return lc
 
@@ -84,10 +91,10 @@ def norData():
                         else:
                             lineSet.append(x * -1)
 
-
         strSet = lineSet.__str__()
         new.write(strSet)
         new.write("\n")
+        data.append(lineSet)
 
     ref.close()
     new.close()
@@ -95,17 +102,16 @@ def norData():
 
 
 def main():
-    t = {1, -2, 3}
-
-    t1 = [{1}, {-2}, {-3}]
-    x = [{'pao', 'leite'}, {'leite', 'cafe'}, {'ovo', 'cafe'}]
-
-    print(subSet(genCandidatos(x), t))
-    print(subSet(t1, t))
-    print(genCandidatos(x))
-
+    # t = {1, -2, 3}
+    #
+    # t1 = [{1}, {-2}, {-3}]
+    # x = [{'pao', 'leite'}, {'leite', 'cafe'}, {'ovo', 'cafe'}]
+    #
+    # print(subSet(genCandidatos(x), t))
+    # print(subSet(t1, t))
+    # print(genCandidatos(x))
     norData()
-    print("END!")
 
+    print(sigma([]))
 
 main()
