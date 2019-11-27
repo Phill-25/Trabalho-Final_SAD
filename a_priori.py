@@ -18,15 +18,15 @@ def sigma(item):
 # função para gerar os candidatos a partir de F -> funcionando
 
 def genCandidatos(f):
-    l = []
+    listC = []
     fc = f.copy()
     while fc:
         t = fc.pop()
         for c in fc:
             u = c | t
             if len(u) == len(c)+1:
-                l.append(u)
-    return l
+                listC.append(u)
+    return listC
 
 
 # função que gera o set com os conjuntos que estão nas transações -> funcionando
@@ -57,10 +57,52 @@ def apriori(supMin, transacoes, itens):
 
     return f
 
+def norData():
+    ref = open("house_votes_84.data", "r")
+    new = open("house_votes_nor.data", "w")
 
-t = {'pao', 'leite', 'cafe'}
 
-t1 = [{'pao'}, {'leite'}, {'cafe'}]
-x = [{'pao', 'leite'}, {'leite', 'cafe'}, {'ovo', 'cafe'}]
-print(subSet(x, t))
-print(genCandidatos(t1))
+    for line in ref:
+        sline = line.split(",")
+        lineSet = []
+        for i in range(len(sline)):
+            x = i + 1
+            if i == 0:
+                if sline[i].__eq__('republican'):
+                    lineSet.append(x)
+                else:
+                    lineSet.append(x*-1)
+            else:
+                if sline[i] == "?":
+                    lineSet.append("?")
+                else:
+                    if sline[i] == "y":
+                        lineSet.append(x)
+                    else:
+                        lineSet.append(x*-1)
+
+        strSet = lineSet.__str__()
+        new.write(strSet)
+        new.write("\n")
+
+    ref.close()
+    new.close()
+    return 1
+
+
+
+def main():
+
+    t = {1, -2, 3}
+
+    t1 = [{1}, {-2}, {-3}]
+    x = [{'pao', 'leite'}, {'leite', 'cafe'}, {'ovo', 'cafe'}]
+
+    print(subSet(genCandidatos(x), t))
+    print(subSet(t1, t))
+    print(genCandidatos(x))
+
+    norData()
+    print("END!")
+
+main()
