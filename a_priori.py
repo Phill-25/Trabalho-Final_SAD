@@ -9,7 +9,7 @@ Philipe Rocha
 
 data = []
 itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-17]
-supMin = 0.50
+supMin = 0.48
 
 def norData():
     ref = open("house_votes_84.data", "r")
@@ -94,7 +94,6 @@ def uniList(l1, l2):
 
 def apriori(supMin, transacoes, itens):
     k: int = 1
-    Reult = []
     # f_list = [{i} for i in itens ]  # itemset de 1 elemento -> funciona, basta a função sigma
     f_list = [{i} for i in itens if sigma([i])/len(data) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
     f = fk = f_list
@@ -104,10 +103,10 @@ def apriori(supMin, transacoes, itens):
 
         for t in transacoes:
             ct = subSet(ck, t)
-            for c in ct:
-                c
-                # incrementa o suporte -> fiquei com dúvida nessa parte..
-        fk_list = [c for c in ck if sigma(list(c))/len(data) >= supMin]
+            # for c in ct:
+            #     c
+            #     # incrementa o suporte -> fiquei com dúvida nessa parte..
+        fk_list = [c for c in ct if sigma(list(c))/len(data) >= supMin]
         if len(fk_list) == 0: break
         f = uniList(f, fk_list)
         fk_list.clear()
