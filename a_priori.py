@@ -72,6 +72,8 @@ def norData():
                     lineSet.append(x)
                 else:
                     lineSet.append(x*-1)
+            if i == 16:
+                lineSet.append(sline[i])
             else:
                 if sline[i] == "?":
                     lineSet.append("?")
