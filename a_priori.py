@@ -9,7 +9,7 @@ Philipe Rocha
 
 data = []
 itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-17]
-supMin = 0.44
+supMin = 0.42
 
 def norData():
     ref = open("house_votes_84.data", "r")
@@ -121,6 +121,8 @@ def apriori(supMin, transacoes, itens):
 def main():
     norData()
     x = apriori(supMin, data, itens_data)
+
+    print(x)
     for i in x:
         li = list(i)
         print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
