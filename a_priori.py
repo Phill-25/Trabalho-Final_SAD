@@ -99,9 +99,9 @@ def uniList(l1, l2):
 def apriori(supMin, transacoes, itens):
     k: int = 1
     f_list = [{i} for i in itens if sigma([i])/len(data) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
-    f = fk = f_list
+    f = f_list
     fk_list = []
-    while len(fk) != 0:
+    while True:
         k += 1
         ck = genCandidatos(f)
 
@@ -128,8 +128,9 @@ def main():
         print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
         print("Confiança:"+str(conf(i)))
         li.reverse()
+        ir = set(li)
         print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
-        print("Confiança:"+str(conf(i)))
+        print("Confiança:"+str(conf(ir)))
 
 
 main()
