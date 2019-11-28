@@ -107,9 +107,6 @@ def apriori(supMin, transacoes, itens):
 
         for t in transacoes:
             ct = subSet(ck, t)
-            # for c in ct:
-            #     c
-            #     # incrementa o suporte -> fiquei com dúvida nessa parte..
             fk_list = [c for c in ct if sigma(list(c))/len(data) >= supMin]
         if len(fk_list) == 0: break
         f = uniList(f, fk_list)
