@@ -8,9 +8,8 @@ Philipe Rocha
 """
 
 data = []
-itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-17]
-supMin = 0.42
-
+itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16]
+supMin = 0.5
 def norData():
     ref = open("house_votes_84.data", "r")
     new = open("house_votes_nor.data", "w")
@@ -56,7 +55,6 @@ def sigma(citem):
         ld = set(d)
         if sc.issubset(ld):
             sig += 1
-
     return sig
 
 def conf(regra):
@@ -74,7 +72,8 @@ def genCandidatos(f):
         for c in fc:
             u = c | t
             if len(u) == len(c) + 1:
-                listC.append(u)
+                if u not in listC and u not in fc:
+                    listC.append(u)
     return listC
 
 
@@ -98,16 +97,13 @@ def uniList(l1, l2):
 
 def apriori(supMin, transacoes, itens):
     k: int = 1
-    f_list = [{i} for i in itens if sigma([i])/len(data) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
-    f = f_list
-    fk_list = []
+    f = [{i} for i in itens if sigma([i])/len(data) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
     while True:
         k += 1
         ck = genCandidatos(f)
-
         for t in transacoes:
             ct = subSet(ck, t)
-            fk_list = [c for c in ct if sigma(list(c))/len(data) >= supMin]
+        fk_list = [c for c in ck if sigma(list(c))/len(data) >= supMin]
         if len(fk_list) == 0: break
         f = uniList(f, fk_list)
         fk_list.clear()
@@ -128,6 +124,5 @@ def main():
         ir = set(li)
         print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
         print("Confiança:"+str(conf(ir)))
-
 
 main()
