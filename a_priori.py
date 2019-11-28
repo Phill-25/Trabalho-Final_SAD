@@ -9,7 +9,7 @@ Philipe Rocha
 
 data = []
 itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16]
-supMin = 0.5
+supMin = 0.45
 def norData():
     ref = open("house_votes_84.data", "r")
     new = open("house_votes_nor.data", "w")
@@ -84,7 +84,8 @@ def subSet(C, t):
     t = set(t)
     for c in C:
         if t.issuperset(c):
-            lc.append(c)
+            if c not in lc:
+                lc.append(c)
     return lc
 
 def uniList(l1, l2):
@@ -97,13 +98,13 @@ def uniList(l1, l2):
 
 def apriori(supMin, transacoes, itens):
     k: int = 1
-    f = [{i} for i in itens if sigma([i])/len(data) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
+    f = [{i} for i in itens if sigma([i])/len(transacoes) >= supMin]  # itemset de 1 elemento -> funciona, basta a função sigma
     while True:
         k += 1
         ck = genCandidatos(f)
         for t in transacoes:
             ct = subSet(ck, t)
-        fk_list = [c for c in ck if sigma(list(c))/len(data) >= supMin]
+        fk_list = [c for c in ck if sigma(list(c))/len(transacoes) >= supMin]
         if len(fk_list) == 0: break
         f = uniList(f, fk_list)
         fk_list.clear()
