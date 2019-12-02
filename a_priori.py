@@ -9,7 +9,7 @@ Philipe Rocha
 
 data = []
 itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16]
-supMin = 0.48
+supMin = 0.6
 def norData():
     ref = open("house_votes_84.data", "r")
     new = open("house_votes_nor.data", "w")
@@ -61,9 +61,11 @@ def conf(regra):
     lr = list(regra)
     if type(lr[0]) == int:
         z0 = [lr[0]]
+        if len(lr[1]) == 0: return 0
         return sigma(z0) / sigma(lr[1])
     if type(lr[1]) == int:
         z1 = [lr[1]]
+        if len(lr[0]) == 0: return 0
         return sigma(lr[0]) / sigma(z1)
     return 0
 
@@ -158,7 +160,7 @@ def main():
 
         li = list(i)
 
-        print("{" + str(li[0]) + "} -> {" + str(li[1]) + "}")
+        print("" + str(li[0]) + " -> " + str(li[1]) + "")
         print("Confiança:"+str(conf(i)))
         #----------codigo anterior (Gera confiança para conjuntos de dois elementos) não funciona pra lista de lista------------
         # li = list(i)
