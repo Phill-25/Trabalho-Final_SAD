@@ -15,7 +15,7 @@ def norData():
     new = open("house_votes_nor.data", "w")
 
     for line in ref:
-        sline = line.split(",")
+        sline = line.split(",") # incluir cada elemento da base de dados de forma individual
         lineSet = []
         for i in range(len(sline)):
             x = i + 1
@@ -111,19 +111,55 @@ def apriori(supMin, transacoes, itens):
 
     return f
 
+def regra(lista):
+  rt = []
+  for i in lista:
+    for e in i:
+      lc = list(i)
+      lc.remove(e)
+      c1 = [e]
+      c1.append(lc)
+      c2 = [lc]
+      c2.append(e)
+      if c1 not in rt:
+        rt.append(c1)
+      if c2 not in rt:
+        rt.append(c2)
+  return list(rt)
+
+
+
 
 def main():
     norData()
     x = apriori(supMin, data, itens_data)
 
+    #print(x[0])
+    print("Resultado Apriori")
     print(x)
-    for i in x:
-        li = list(i)
-        print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
-        print("Confiança:"+str(conf(i)))
-        li.reverse()
-        ir = set(li)
-        print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
-        print("Confiança:"+str(conf(ir)))
 
+    reg = regra(x)
+    print("Combinações de Conjuntos")
+    print(reg)
+
+    print("*************************************************")
+    print("************     Regras         *****************")
+    print("*************************************************")
+    for i in reg:
+
+
+        #Não conseguimos calcular a confiaça para as regras
+
+        li = list(i)
+        print("{" + str(li[0]) + "} -> {" + str(li[1]) + "}")
+
+        #----------codigo anterior (Gera confiança para conjuntos de dois elementos) não funciona pra lista de lista------------
+        # li = list(i)
+        # print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
+        # print("Confiança:"+str(conf(i)))
+        # li.reverse()
+        # ir = set(li)
+        # print("{"+str(li[0])+"}-> {"+str(li[1])+"}")
+        # print("Confiança:"+str(conf(ir)))
+        #-------------------------------------------------------------------------------------------------------------------
 main()
