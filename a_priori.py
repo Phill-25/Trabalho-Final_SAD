@@ -9,7 +9,7 @@ Philipe Rocha
 
 data = []
 itens_data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16]
-supMin = 0.48
+supMin = 0.45
 def norData():
     ref = open("house_votes_84.data", "r")
     new = open("house_votes_nor.data", "w")
